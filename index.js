@@ -39,14 +39,47 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-  
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
 
+Person.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
+
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+
+const james = new Person ('James', 31);
+const sam = new Person ('Sam', 37);
+const latoya = new Person ('Latoya', 32);
+
+console.log(james.toString());
+console.log(sam.toString());
+console.log(latoya.toString());
 
 
+james.eat('pizza');
+james.eat('fries');
+james.eat('ice cream');
+james.eat('tacos');
+james.eat('sandwich');
+james.eat('sushi');
+james.eat('cake');
 
+console.log('James stomach', james.stomach);
+console.log(james.poop());
 
+console.log('James stomach after using the bathroom', james.stomach);
 
 
 /*
@@ -63,10 +96,22 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-  
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
 
+Car.prototype.fill = function(gallons){
+  gallons + this.tank;
+}
+
+const toyota = new Car('Toyota', 32);
+
+toyota.fill(31);
+
+console.log('Task 2',toyota);
 
 /*
   TASK 3
@@ -75,18 +120,28 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
+function Baby(name, age, favoriteToy) {
+ this.name = name;
+ this.age = age;
+ this.favoriteToy = favoriteToy;
 }
+
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`;
+}
+
+const storm = new Baby ('Stormy', 1, 'Legos');
+
+console.log('Task 3', storm)
 
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window binding - if none of the other rules for 'this' applies, defaults to the entire window in which you're working on OR returns undefined in strict mode
+  2. Implicit binding - applies to the objects with methods. When the function is invoked, it refers to the left of the dot(.).
+  3. Explicit binding - three types of explicit binding .call, .apply, and .bind. .Call immediately invokes the function with each argument passing 1 by 1. .Apply will immediaitely pass argument as an array. .Bind will pass arguments 1 by 1 BUT does not immediately invoke the function and it insteads return a new function
+  4. New binding - using the new keyword constructs a new object and 'this' points to the newly created object
 */
 
 
